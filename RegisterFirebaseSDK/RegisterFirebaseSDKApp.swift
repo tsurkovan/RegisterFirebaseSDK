@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct RegisterFirebaseSDKApp: App {
-    var body: some Scene {
+    init() { // Инициализация сервисов до построения UI. 1 раз при запуске приложения
+        FirebaseApp.configure() // Читает plist, соединяется с Firebase, готовит SDK
+    }
+    
+    var body: some Scene { // Описание интерфейса. Много раз при запуске и изменения состояния
         WindowGroup {
             ContentView()
         }
