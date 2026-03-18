@@ -10,6 +10,7 @@
 		7D7C5C562F698893000334A4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7D7C5C552F698893000334A4 /* FirebaseAnalytics */; };
 		7D7C5C582F698893000334A4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7D7C5C572F698893000334A4 /* FirebaseAuth */; };
 		7D7C5C5A2F698893000334A4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7D7C5C592F698893000334A4 /* FirebaseFirestore */; };
+		7D7C5C632F6B4321000334A4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C5C622F6B430D000334A4 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		7D7C5C282F6893B9000334A4 /* RegisterFirebaseSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegisterFirebaseSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D7C5C352F6893BB000334A4 /* RegisterFirebaseSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RegisterFirebaseSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D7C5C3F2F6893BB000334A4 /* RegisterFirebaseSDKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RegisterFirebaseSDKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D7C5C622F6B430D000334A4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -84,6 +86,7 @@
 		7D7C5C1F2F6893B9000334A4 = {
 			isa = PBXGroup;
 			children = (
+				7D7C5C622F6B430D000334A4 /* README.md */,
 				7D7C5C2A2F6893B9000334A4 /* RegisterFirebaseSDK */,
 				7D7C5C382F6893BB000334A4 /* RegisterFirebaseSDKTests */,
 				7D7C5C422F6893BB000334A4 /* RegisterFirebaseSDKUITests */,
@@ -251,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D7C5C632F6B4321000334A4 /* README.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
