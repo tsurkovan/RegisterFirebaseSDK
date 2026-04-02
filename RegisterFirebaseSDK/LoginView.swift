@@ -92,14 +92,8 @@ struct LoginView: View {  // 🏗️ Объявление структуры Log
                                 Button(action: {
                                     // 🔄 toggle() меняет значение на противоположное: false ↔ true
                                     // При нажатии: пароль то скрывается, то показывается
-                                    
-                                    // 📝 ЛОГИРОВАНИЕ: отслеживаем переключение видимости пароля
-                                    print("👁️ [PasswordVisibility] Переключаем: было \(isPasswordVisible) → станет \(!isPasswordVisible)")
-                                    
+                                   
                                     isPasswordVisible.toggle()
-                                    
-                                    // 📝 ЛОГИРОВАНИЕ: подтверждаем изменение
-                                    print("👁️ [PasswordVisibility] Теперь: isPasswordVisible = \(isPasswordVisible)")
                                     
                                 }) {
                                     // 🖼️ Иконка из SF Symbols (системные иконки Apple)
@@ -146,48 +140,17 @@ struct LoginView: View {  // 🏗️ Объявление структуры Log
                             title: viewModel.isSignUpMode ? "Зарегистрироваться" : "Войти",  // 📄 Динамический текст кнопки в зависимости от режима
                             action: {  // ⚡ Действие при нажатии на кнопку
                                 
-                                // 📝 ЛОГИРОВАНИЕ: начало процесса входа/регистрации
-                                print("\n🔥 ============================================")
-                                print("🔥 [LoginView] НАЧАЛО: нажата кнопка '\(viewModel.isSignUpMode ? "Зарегистрироваться" : "Войти")'")
-                                print("🔥 ============================================")
-                                                                
-                                // 📝 ЛОГИРОВАНИЕ: выводим текущие данные формы
-                                print("📧 [LoginView] Email: '\(viewModel.email)'")
-                                print("🔐 [LoginView] Password: '\(viewModel.password)'")
-                                print("📝 [LoginView] Режим: \(viewModel.isSignUpMode ? "РЕГИСТРАЦИЯ" : "ВХОД")")
-                                print("✅ [LoginView] Форма валидна: \(viewModel.isFormValid)")
-                                print("⏳ [LoginView] Загрузка: \(viewModel.isLoading)")
-                                
                                 Task {  // 🔄 Создание асинхронной задачи (для вызова async функций)
-                                    
-                                    // 📝 ЛОГИРОВАНИЕ: вход в асинхронную задачу
-                                    print("🧵 [LoginView] Task: создана асинхронная задача")
                                     
                                     if viewModel.isSignUpMode {  // ❓ Проверка режима: если регистрация
                                         
-                                        // 📝 ЛОГИРОВАНИЕ: вызов регистрации
-                                        print("📝 [LoginView] Вызов: await viewModel.signUp()")
-                                        
                                         await viewModel.signUp()  // 📝 Вызов асинхронного метода регистрации (ожидание завершения)
-                                        
-                                        // 📝 ЛОГИРОВАНИЕ
-                                        print("✅ [LoginView] signUp() завершен")
                                         
                                     } else {  // ➡️ Иначе (режим входа)
                                         
-                                        // 📝 ЛОГИРОВАНИЕ: вызов входа
-                                        print("🔑 [LoginView] Вызов: await viewModel.signIn()")
-                                        
                                         await viewModel.signIn()  // 🔑 Вызов асинхронного метода входа (ожидание завершения)
                                         
-                                        // 📝 ЛОГИРОВАНИЕ
-                                        print("✅ [LoginView] signIn() завершен")
-                                        
                                     }
-                                    
-                                    // 📝 ЛОГИРОВАНИЕ: после выполнения операции
-                                    print("🏁 [LoginView] Операция завершена")
-                                    print("🔥 ============================================\n")
                                     
                                 }
                             },
@@ -201,16 +164,10 @@ struct LoginView: View {  // 🏗️ Объявление структуры Log
                         // 🔄 ============================================
                         Button(action: {  // 🔘 Кнопка для переключения между входом и регистрацией
                             
-                            // 📝 ЛОГИРОВАНИЕ: переключение режима
-                            print("🔄 [LoginView] Переключение режима: было '\(viewModel.isSignUpMode ? "РЕГИСТРАЦИЯ" : "ВХОД")'")
-                            
                             withAnimation {  // 🎬 Применение анимации к изменениям состояния
                                 viewModel.isSignUpMode.toggle()  // 🔄 Переключение режима (true ↔ false)
                                 viewModel.errorMessage = nil  // 🧹 Очистка сообщения об ошибке при смене режима
                             }
-                            
-                            // 📝 ЛОГИРОВАНИЕ: после переключения
-                            print("🔄 [LoginView] Теперь режим: '\(viewModel.isSignUpMode ? "РЕГИСТРАЦИЯ" : "ВХОД")'")
                             
                         }) {
                             Text(viewModel.isSignUpMode ?  // 📄 Динамический текст подсказки

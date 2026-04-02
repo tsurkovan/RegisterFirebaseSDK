@@ -88,29 +88,12 @@ final class RegisterService {       // → 🔹 final: запрет наслед
         // → ⚡ async: ждём сетевой запрос
         // → 🔥 throws: может выбросить ошибку
         // → 🎯 Возвращает Void (ничего не возвращает)
-        // 🔍 ДИАГНОСТИКА - БЕЗОПАСНЫЙ ВАРИАНТ:
-        if let apps = FirebaseApp.allApps {
-            print("🔥 [DIAGNOSTIC] Firebase Apps count: \(apps.count)")
-            if let app = FirebaseApp.app() {
-                print("🔥 [DIAGNOSTIC] App name: \(app.name)")
-                print("🔥 [DIAGNOSTIC] Bundle ID: \(app.options.bundleID)")
-            } else {
-                print("🔥 [DIAGNOSTIC] ⚠️ Default app is NIL!")
-            }
-        } else {
-            print("🔥 [DIAGNOSTIC] ❌ Firebase NOT INITIALIZED (allApps is nil)")
-        }
-            
-        print("🔥 [DIAGNOSTIC] Current user: \(Auth.auth().currentUser?.email ?? "nil")")
         do {
             try await Auth.auth()
                 .signIn(withEmail: email, password: password)
             // → try await: выполняем и ждём результат
             // → 🎯 Результат не сохраняем — он нам не нужен
         } catch {
-            print("❌ [DIAGNOSTIC] Raw error: \(error)")
-            print("❌ [DIAGNOSTIC] Raw userInfo: \((error as NSError).userInfo)")
-            
             throw AuthError.fromFirebase(error) // ✅ Ссылка на AuthError из RegisterError.swift
             // → 🔄 Конвертируем ошибку Firebase в нашу
         }
@@ -124,20 +107,13 @@ final class RegisterService {       // → 🔹 final: запрет наслед
     func signUp(email: String, password: String) async throws {
         // → 🎯 Аналогично signIn(), но создаёт нового пользователя
         // → 🎯 Возвращает Void (ничего не возвращает)
-        print("🔥 [RegisterService] ⚡ НАЧАЛО signUp()")  // ← Обязательно!
-        print("🔥 [RegisterService] Email: \(email)")
-
         
         do {
-            print("🔥 [RegisterService] Вызов Auth.auth().createUser...")
             try await Auth.auth()
                 .createUser(withEmail: email, password: password)
             // → try await: выполняем и ждём результат
             // → 🎯 Результат не сохраняем — он нам не нужен
-            print("✅ [RegisterService] signUp() успех!")
         } catch {
-            print("❌ [RegisterService] Ошибка в signUp(): \(error)")
-            print("❌ [RegisterService] userInfo: \((error as NSError).userInfo)")
             throw AuthError.fromFirebase(error)
             // → 🔄 Конвертируем ошибку Firebase в нашу
         }

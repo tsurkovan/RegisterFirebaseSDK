@@ -82,10 +82,6 @@ class RegisterViewModel {   // → 📦 ViewModel в паттерне MVVM: св
     func signIn() async {                // → ⚡ async: метод может приостанавливаться (ждать сеть/БД)
                                          // → 🎯 Вызов: Task { await viewModel.signIn() } из View
         
-        // 📝 ЛОГИРОВАНИЕ
-        print("🔥 [ViewModel] НАЧАЛО signIn()")
-
-        
         
         // ── ШАГ 1: Валидация (ранний выход) ───────────────────
         guard isFormValid else {                     // → 🛡️ guard: если условие НЕ выполнено → выполняем else и выходим
@@ -105,26 +101,14 @@ class RegisterViewModel {   // → 📦 ViewModel в паттерне MVVM: св
         
         
         do {                                             // → 🔄 Блок try-catch: ловим ошибки асинхронного вызова
-            print("🔍 Отладка: попытка входа с \(email)") // Временный print, удалите после
             try await registerService.signIn(               // → 📡 try: метод может выбросить ошибку
                 email: email,                               // → 📧 Передаём email из свойства ViewModel
                 password: password                          // → 🔐 Передаём пароль из свойства ViewModel
             )                                    // → ⏳ await: ждём завершения сетевого запроса (не блокируя UI)
             
-            // 📝 ЛОГИРОВАНИЕ
-            print("✅ [ViewModel] Успешный вход!")
-            
-            
-            
             isLoggedIn = true                    // → ✅ Успех: меняем флаг → View может перейти на главный экран
         } catch {                                         // → ❌ Ошибка: код внутри do выбросил исключение
             // ✅ Теперь используем общий AuthError
-            
-            // 📝 ЛОГИРОВАНИЕ
-            print("❌ [ViewModel] ОШИБКА В signIn():")
-            print("❌ [ViewModel] Error: \(error)")
-            print("❌ [ViewModel] Error localizedDescription: \(error.localizedDescription)")
-            print("❌ [ViewModel] Error as NSError: \((error as NSError).userInfo)")
             
             errorMessage = AuthError.fromFirebase(error)    // → 🎭 Адаптер: преобразуем техническую ошибку Firebase
                 .errorDescription                           // → 📝 в человекочитаемый текст на русском
@@ -160,12 +144,6 @@ class RegisterViewModel {   // → 📦 ViewModel в паттерне MVVM: св
             isLoggedIn = true                               // → ✅ Успех: пользователь авторизован → переходим в приложение
         } catch {                                           // → ❌ Обработка ошибки
             // ✅ Теперь используем общий AuthError
-            
-            // 📝 ЛОГИРОВАНИЕ
-            print("❌ [ViewModel] ОШИБКА В signUp():")
-            print("❌ [ViewModel] Error: \(error)")
-            print("❌ [ViewModel] Error localizedDescription: \(error.localizedDescription)")
-            print("❌ [ViewModel] Error as NSError: \((error as NSError).userInfo)")
             
             errorMessage = AuthError.fromFirebase(error)    // → 🎭 Преобразуем ошибку Firebase
                 .errorDescription                           // → 📝 в понятный текст
